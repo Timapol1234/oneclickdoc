@@ -16,9 +16,9 @@ export function OrganizationSchema() {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Конструктор заявлений',
-    url: 'https://goszayavleniya.ru',
-    logo: 'https://goszayavleniya.ru/logo.png',
+    name: 'oneclickdoc',
+    url: 'https://oneclickdoc.ru',
+    logo: 'https://oneclickdoc.ru/logo.png',
     description:
       'Простой конструктор для создания юридически верных заявлений в МФЦ, суды, банки, ФНС',
     address: {
@@ -38,8 +38,8 @@ export function WebSiteSchema() {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Конструктор заявлений',
-    url: 'https://goszayavleniya.ru',
+    name: 'oneclickdoc',
+    url: 'https://oneclickdoc.ru',
     description:
       'Создавайте юридически корректные заявления для МФЦ, судов, банков и других организаций',
     potentialAction: {
@@ -47,7 +47,7 @@ export function WebSiteSchema() {
       target: {
         '@type': 'EntryPoint',
         urlTemplate:
-          'https://goszayavleniya.ru/templates?search={search_term_string}',
+          'https://oneclickdoc.ru/templates?search={search_term_string}',
       },
       'query-input': 'required name=search_term_string',
     },

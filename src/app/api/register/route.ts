@@ -7,6 +7,10 @@ const registerSchema = z.object({
   email: z.string().email('Неверный формат email'),
   password: z.string().min(6, 'Пароль должен быть не менее 6 символов'),
   name: z.string().min(2, 'Имя должно быть не менее 2 символов').optional(),
+  verificationCode: z
+    .string()
+    .length(6, 'Код должен состоять из 6 цифр')
+    .regex(/^\d{6}$/, 'Код должен содержать только цифры'),
 })
 
 export async function POST(request: NextRequest) {
@@ -15,10 +19,31 @@ export async function POST(request: NextRequest) {
 
     // Validate input
     const validatedData = registerSchema.parse(body)
+    const { email, password, name, verificationCode } = validatedData
+
+    // Проверяем код верификации
+    const verification = await prisma.verificationCode.findFirst({
+      where: {
+        identifier: email,
+        code: verificationCode,
+        verified: true,
+        type: 'email',
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    })
+
+    if (!verification) {
+      return NextResponse.json(
+        { error: 'Неверный или неподтвержденный код' },
+        { status: 400 }
+      )
+    }
 
     // Check if user already exists
     const existingUser = await prisma.user.findUnique({
-      where: { email: validatedData.email },
+      where: { email },
     })
 
     if (existingUser) {
@@ -29,20 +54,29 @@ export async function POST(request: NextRequest) {
     }
 
     // Hash password
-    const passwordHash = await bcrypt.hash(validatedData.password, 10)
+    const passwordHash = await bcrypt.hash(password, 10)
 
     // Create user
     const user = await prisma.user.create({
       data: {
-        email: validatedData.email,
-        name: validatedData.name,
+        email,
+        name,
         passwordHash,
+        emailVerified: new Date(),
       },
       select: {
         id: true,
         email: true,
         name: true,
+        emailVerified: true,
         createdAt: true,
+      },
+    })
+
+    // Удаляем использованный код верификации
+    await prisma.verificationCode.deleteMany({
+      where: {
+        identifier: email,
       },
     })
 

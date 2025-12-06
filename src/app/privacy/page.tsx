@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import MainLayout from '@/components/layout/MainLayout'
 
 export const metadata: Metadata = {
-  title: 'Политика конфиденциальности | Конструктор заявлений',
+  title: 'Политика конфиденциальности | oneclickdoc',
   description:
     'Политика обработки персональных данных и защиты конфиденциальности пользователей',
 }
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
             <p>
               Настоящая Политика конфиденциальности (далее — «Политика»)
               определяет порядок обработки и защиты персональных данных
-              пользователей сервиса <strong>gosZayavleniya</strong> (далее —
+              пользователей сервиса <strong>oneclickdoc</strong> (далее —
               «Сервис»).
             </p>
             <p>
@@ -217,10 +217,10 @@ export default function PrivacyPage() {
             <p className="mt-4">
               Для реализации своих прав обратитесь по адресу:{' '}
               <a
-                href="mailto:privacy@goszayavleniya.ru"
+                href="mailto:privacy@oneclickdoc.ru"
                 className="text-primary hover:underline"
               >
-                privacy@goszayavleniya.ru
+                privacy@oneclickdoc.ru
               </a>
             </p>
           </section>
@@ -299,19 +299,19 @@ export default function PrivacyPage() {
               <li>
                 Email:{' '}
                 <a
-                  href="mailto:privacy@goszayavleniya.ru"
+                  href="mailto:privacy@oneclickdoc.ru"
                   className="text-primary hover:underline"
                 >
-                  privacy@goszayavleniya.ru
+                  privacy@oneclickdoc.ru
                 </a>
               </li>
               <li>
                 Общая поддержка:{' '}
                 <a
-                  href="mailto:support@goszayavleniya.ru"
+                  href="mailto:support@oneclickdoc.ru"
                   className="text-primary hover:underline"
                 >
-                  support@goszayavleniya.ru
+                  support@oneclickdoc.ru
                 </a>
               </li>
             </ul>

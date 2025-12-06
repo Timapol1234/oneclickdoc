@@ -107,24 +107,37 @@ async function main() {
             </div>
 
             <h2 style="text-align: center; margin: 30px 0;">ЗАЯВЛЕНИЕ</h2>
-            <h3 style="text-align: center; margin: 20px 0;">о предоставлении налогового вычета</h3>
+            <h3 style="text-align: center; margin: 20px 0;">о предоставлении социального налогового вычета</h3>
 
             <p style="text-indent: 40px;">
               Прошу предоставить мне социальный налоговый вычет в соответствии с подпунктом 3 пункта 1 статьи 219
-              Налогового кодекса Российской Федерации за {{year}} год в сумме {{amount}} рублей,
+              Налогового кодекса Российской Федерации за {{year}} год в сумме фактически произведенных расходов
+              {{amount}} рублей (в пределах установленного лимита 120 000 рублей для обычного лечения),
               уплаченных мной за {{treatmentType}}.
+            </p>
+
+            <p style="text-indent: 40px;">
+              Медицинские услуги оказаны медицинской организацией, имеющей лицензию на осуществление медицинской деятельности.
             </p>
 
             <p style="text-indent: 40px;">
               К заявлению прилагаю следующие документы:
             </p>
             <ol>
-              <li>Копия паспорта</li>
+              <li>Копия паспорта гражданина РФ</li>
               <li>Справка 2-НДФЛ за {{year}} год</li>
-              <li>Договор с медицинским учреждением</li>
-              <li>Платежные документы</li>
-              <li>Справка об оплате медицинских услуг</li>
+              <li>Налоговая декларация по форме 3-НДФЛ за {{year}} год</li>
+              <li>Договор с медицинским учреждением на оказание медицинских услуг</li>
+              <li>Копия лицензии медицинского учреждения</li>
+              <li>Справка об оплате медицинских услуг для представления в налоговые органы (оригинал)</li>
+              <li>Платежные документы (чеки, квитанции, платежные поручения)</li>
+              <li>Рецепты по форме N 107-1/у (при возмещении расходов на лекарства)</li>
             </ol>
+
+            <p style="text-indent: 40px;">
+              <i>Примечание: Максимальная сумма расходов на лечение, по которой предоставляется вычет - 120 000 руб. в год.
+              Для дорогостоящего лечения (код услуги "2" в справке) лимит не применяется.</i>
+            </p>
 
             <div style="margin-top: 40px;">
               <p>
@@ -287,12 +300,16 @@ async function main() {
             <h3 style="text-align: center;">ПРОШУ:</h3>
             <ol>
               <li>Вернуть незаконно удержанную сумму {{amount}} рублей на счет {{accountNumber}}</li>
-              <li>Предоставить письменный ответ на данную претензию в течение 10 дней</li>
+              <li>Предоставить письменный ответ на данную претензию в течение 30 дней в соответствии
+              с требованиями статьи 16 Федерального закона "О банках и банковской деятельности"
+              от 02.12.1990 № 395-1</li>
             </ol>
 
             <p>
               В случае отказа в удовлетворении претензии буду вынужден(а) обратиться в суд с требованием
-              о взыскании указанной суммы, компенсации морального вреда, штрафа и судебных расходов.
+              о взыскании указанной суммы, компенсации морального вреда, штрафа в размере 50% от суммы,
+              присужденной судом в мою пользу (п. 6 ст. 13 Закона РФ "О защите прав потребителей"),
+              а также судебных расходов.
             </p>
 
             <div style="margin-top: 40px;">
@@ -706,9 +723,11 @@ async function main() {
           <div style="font-family: 'Times New Roman', serif; font-size: 14pt; line-height: 1.5;">
             <div style="text-align: right; margin-bottom: 20px;">
               В {{courtName}}<br/>
+              <br/>
               Истец: {{fullName}}<br/>
               Адрес: {{address}}<br/>
               Телефон: {{phone}}<br/>
+              <br/>
               Ответчик: {{spouseName}}<br/>
               Адрес ответчика: {{spouseAddress}}
             </div>
@@ -717,30 +736,48 @@ async function main() {
             <h3 style="text-align: center; margin: 20px 0;">о расторжении брака</h3>
 
             <p style="text-indent: 40px;">
-              {{marriageDate}} я вступил(а) в брак с {{spouseName}}. Брак зарегистрирован {{registrationPlace}}, запись акта {{actNumber}}.
+              {{marriageDate}} я вступил(а) в брак с {{spouseName}}. Брак зарегистрирован {{registrationPlace}}, запись акта о заключении брака {{actNumber}}.
             </p>
 
             <p style="text-indent: 40px;">
-              От брака имеем детей: {{childrenInfo}}.
+              От брака имеем {{childrenCount}} несовершеннолетних детей: {{childrenInfo}}.
             </p>
 
             <p style="text-indent: 40px;">
-              Совместная жизнь не сложилась, брачные отношения фактически прекращены с {{separationDate}}. {{divorceReason}}
+              Совместная жизнь не сложилась, брачные отношения фактически прекращены с {{separationDate}}.
+              Дальнейшее сохранение семьи и совместное проживание невозможно. {{divorceReason}}
             </p>
 
             <p style="text-indent: 40px;">
-              На основании изложенного и руководствуясь ст. 21-23 Семейного кодекса РФ,
+              Спор о разделе совместно нажитого имущества {{propertyDispute}}.
+              Спор о месте жительства детей и порядке общения с ними {{childrenDispute}}.
             </p>
 
-            <h3 style="text-align: center;">ПРОШУ:</h3>
+            <p style="text-indent: 40px;">
+              На основании изложенного и руководствуясь ст. 21-23 Семейного кодекса Российской Федерации, ст. 131-132 Гражданского процессуального кодекса РФ,
+            </p>
+
+            <h3 style="text-align: center; margin: 20px 0;">ПРОШУ:</h3>
             <ol>
-              <li>Расторгнуть брак между мной и {{spouseName}}</li>
+              <li>Расторгнуть брак между мной, {{fullName}}, и {{spouseName}}, заключенный {{marriageDate}}, актовая запись {{actNumber}}</li>
+            </ol>
+
+            <h3 style="margin-top: 30px;">Цена иска:</h3>
+            <p>Не подлежит оценке (пп. 4 п. 1 ст. 333.19 НК РФ), госпошлина 600 рублей.</p>
+
+            <h3>Приложения:</h3>
+            <ol>
+              <li>Копия искового заявления для ответчика</li>
+              <li>Копия свидетельства о заключении брака</li>
+              <li>Копии свидетельств о рождении детей (при наличии)</li>
+              <li>Квитанция об уплате государственной пошлины (600 рублей)</li>
+              <li>Документы, подтверждающие обстоятельства, на которых основаны исковые требования</li>
             </ol>
 
             <div style="margin-top: 40px;">
               <p>
                 <span style="display: inline-block; width: 150px;">Дата:</span> {{date}}<br/>
-                <span style="display: inline-block; width: 150px;">Подпись:</span> _____________
+                <span style="display: inline-block; width: 150px;">Подпись истца:</span> _____________ {{fullName}}
               </p>
             </div>
           </div>
@@ -838,12 +875,33 @@ async function main() {
       },
       {
         templateId: divorceTemplate.id,
+        fieldName: 'childrenCount',
+        fieldType: 'select',
+        label: 'Количество детей',
+        stepNumber: 3,
+        order: 1,
+        isRequired: true,
+        options: 'нет детей,1,2,3,4 и более',
+      },
+      {
+        templateId: divorceTemplate.id,
         fieldName: 'childrenInfo',
         fieldType: 'textarea',
         label: 'Информация о детях (ФИО, дата рождения)',
+        placeholder: 'Иванов Петр Иванович, 15.05.2015 г.р.',
         stepNumber: 3,
-        order: 1,
+        order: 2,
         isRequired: false,
+      },
+      {
+        templateId: divorceTemplate.id,
+        fieldName: 'childrenDispute',
+        fieldType: 'select',
+        label: 'Спор о детях',
+        stepNumber: 3,
+        order: 3,
+        isRequired: true,
+        options: 'отсутствует,будет рассмотрен отдельно,просим определить место жительства с истцом',
       },
       {
         templateId: divorceTemplate.id,
@@ -851,17 +909,28 @@ async function main() {
         fieldType: 'date',
         label: 'Дата прекращения отношений',
         stepNumber: 3,
-        order: 2,
+        order: 4,
         isRequired: true,
       },
       {
         templateId: divorceTemplate.id,
         fieldName: 'divorceReason',
         fieldType: 'textarea',
-        label: 'Причина развода',
+        label: 'Причина развода (подробно)',
+        placeholder: 'Например: Постоянные конфликты, разные взгляды на жизнь, отсутствие взаимопонимания...',
         stepNumber: 3,
-        order: 3,
+        order: 5,
         isRequired: true,
+      },
+      {
+        templateId: divorceTemplate.id,
+        fieldName: 'propertyDispute',
+        fieldType: 'select',
+        label: 'Спор об имуществе',
+        stepNumber: 3,
+        order: 6,
+        isRequired: true,
+        options: 'отсутствует,будет рассмотрен отдельно,имущество отсутствует',
       },
       {
         templateId: divorceTemplate.id,
@@ -869,7 +938,7 @@ async function main() {
         fieldType: 'date',
         label: 'Дата подачи',
         stepNumber: 3,
-        order: 4,
+        order: 7,
         isRequired: true,
       },
     ],
@@ -1463,12 +1532,55 @@ async function main() {
       description: 'Имущественный налоговый вычет при покупке квартиры/дома',
       categoryId: categories.find((c) => c.slug === 'fns')!.id,
       contentJson: JSON.stringify({
-        html: `<div style="font-family: 'Times New Roman', serif; font-size: 14pt;">
-            <div style="text-align: right; margin-bottom: 20px;">В Инспекцию ФНС<br/>от {{fullName}}<br/>ИНН {{inn}}</div>
+        html: `<div style="font-family: 'Times New Roman', serif; font-size: 14pt; line-height: 1.5;">
+            <div style="text-align: right; margin-bottom: 20px;">
+              В Инспекцию ФНС России<br/>
+              {{taxOffice}}<br/>
+              от {{fullName}}<br/>
+              ИНН {{inn}}<br/>
+              Адрес регистрации: {{address}}<br/>
+              Телефон: {{phone}}
+            </div>
+
             <h2 style="text-align: center; margin: 30px 0;">ЗАЯВЛЕНИЕ</h2>
-            <h3 style="text-align: center;">о предоставлении имущественного налогового вычета</h3>
-            <p style="text-indent: 40px;">Прошу предоставить имущественный налоговый вычет в соответствии со ст. 220 НК РФ за {{year}} год в сумме {{amount}} рублей в связи с приобретением {{propertyType}} по адресу: {{propertyAddress}}.</p>
-            <p>Дата: {{date}}<br/>Подпись: _____________</p>
+            <h3 style="text-align: center; margin-bottom: 20px;">о предоставлении имущественного налогового вычета</h3>
+
+            <p style="text-indent: 40px;">
+              Прошу предоставить мне имущественный налоговый вычет в соответствии с подпунктом 3 пункта 1
+              статьи 220 Налогового кодекса Российской Федерации за {{year}} год в сумме фактически
+              произведенных расходов {{amount}} рублей (в пределах установленного лимита 2 000 000 рублей)
+              в связи с приобретением {{propertyType}} по адресу: {{propertyAddress}}.
+            </p>
+
+            <p style="text-indent: 40px;">
+              Право собственности на объект недвижимости зарегистрировано {{registrationDate}},
+              номер регистрации: {{registrationNumber}}.
+            </p>
+
+            <h3 style="margin-top: 30px;">Приложения:</h3>
+            <ol>
+              <li>Копия паспорта гражданина РФ</li>
+              <li>Справка 2-НДФЛ за {{year}} год</li>
+              <li>Налоговая декларация по форме 3-НДФЛ за {{year}} год</li>
+              <li>Копия договора купли-продажи (или договора долевого участия)</li>
+              <li>Копия свидетельства о государственной регистрации права собственности (или выписка из ЕГРН)</li>
+              <li>Платежные документы, подтверждающие факт уплаты денежных средств (квитанции, платежные поручения, расписки)</li>
+              <li>Копия акта приема-передачи (для договора долевого участия)</li>
+            </ol>
+
+            <p style="margin-top: 20px; text-indent: 40px;">
+              <i>Примечание: Максимальная сумма расходов на приобретение жилья, с которой предоставляется
+              вычет - 2 000 000 рублей (максимальная сумма возврата налога - 260 000 рублей). Дополнительно
+              можно получить вычет по процентам по ипотеке в размере до 3 000 000 рублей
+              (максимальный возврат - 390 000 рублей).</i>
+            </p>
+
+            <div style="margin-top: 40px;">
+              <p>
+                <span style="display: inline-block; width: 150px;">Дата:</span> {{date}}<br/>
+                <span style="display: inline-block; width: 150px;">Подпись:</span> _____________
+              </p>
+            </div>
           </div>`,
       }),
       isActive: true,
@@ -1484,7 +1596,7 @@ async function main() {
         templateId: propertyDeductionTemplate.id,
         fieldName: 'fullName',
         fieldType: 'text',
-        label: 'ФИО',
+        label: 'ФИО (полностью)',
         stepNumber: 1,
         order: 1,
         isRequired: true,
@@ -1500,20 +1612,47 @@ async function main() {
       },
       {
         templateId: propertyDeductionTemplate.id,
-        fieldName: 'year',
-        fieldType: 'number',
-        label: 'Год',
+        fieldName: 'taxOffice',
+        fieldType: 'text',
+        label: 'Номер налоговой инспекции (например, № 28 по г. Москве)',
         stepNumber: 1,
         order: 3,
         isRequired: true,
       },
       {
         templateId: propertyDeductionTemplate.id,
-        fieldName: 'amount',
+        fieldName: 'address',
+        fieldType: 'text',
+        label: 'Адрес регистрации',
+        stepNumber: 1,
+        order: 4,
+        isRequired: true,
+      },
+      {
+        templateId: propertyDeductionTemplate.id,
+        fieldName: 'phone',
+        fieldType: 'text',
+        label: 'Телефон',
+        stepNumber: 1,
+        order: 5,
+        isRequired: true,
+      },
+      {
+        templateId: propertyDeductionTemplate.id,
+        fieldName: 'year',
         fieldType: 'number',
-        label: 'Сумма вычета (руб.)',
+        label: 'Год, за который запрашивается вычет',
         stepNumber: 2,
         order: 1,
+        isRequired: true,
+      },
+      {
+        templateId: propertyDeductionTemplate.id,
+        fieldName: 'amount',
+        fieldType: 'number',
+        label: 'Сумма фактических расходов (не более 2 000 000 руб.)',
+        stepNumber: 2,
+        order: 2,
         isRequired: true,
       },
       {
@@ -1522,7 +1661,7 @@ async function main() {
         fieldType: 'select',
         label: 'Тип недвижимости',
         stepNumber: 2,
-        order: 2,
+        order: 3,
         isRequired: true,
         options: 'квартиры,дома,комнаты,земельного участка',
       },
@@ -1530,18 +1669,36 @@ async function main() {
         templateId: propertyDeductionTemplate.id,
         fieldName: 'propertyAddress',
         fieldType: 'text',
-        label: 'Адрес недвижимости',
+        label: 'Адрес приобретенной недвижимости',
         stepNumber: 2,
-        order: 3,
+        order: 4,
+        isRequired: true,
+      },
+      {
+        templateId: propertyDeductionTemplate.id,
+        fieldName: 'registrationDate',
+        fieldType: 'date',
+        label: 'Дата регистрации права собственности',
+        stepNumber: 3,
+        order: 1,
+        isRequired: true,
+      },
+      {
+        templateId: propertyDeductionTemplate.id,
+        fieldName: 'registrationNumber',
+        fieldType: 'text',
+        label: 'Номер регистрации права собственности',
+        stepNumber: 3,
+        order: 2,
         isRequired: true,
       },
       {
         templateId: propertyDeductionTemplate.id,
         fieldName: 'date',
         fieldType: 'date',
-        label: 'Дата',
-        stepNumber: 2,
-        order: 4,
+        label: 'Дата подачи заявления',
+        stepNumber: 3,
+        order: 3,
         isRequired: true,
       },
     ],
@@ -2195,14 +2352,87 @@ async function main() {
         'Иск к продавцу/исполнителю услуг о возмещении ущерба',
       categoryId: categories.find((c) => c.slug === 'courts')!.id,
       contentJson: JSON.stringify({
-        html: `<div style="font-family: 'Times New Roman', serif; font-size: 14pt;">
-            <div style="text-align: right; margin-bottom: 20px;">В {{courtName}}<br/>Истец: {{fullName}}<br/>Ответчик: {{defendant}}</div>
+        html: `<div style="font-family: 'Times New Roman', serif; font-size: 14pt; line-height: 1.5;">
+            <div style="text-align: right; margin-bottom: 20px;">
+              В {{courtName}}<br/><br/>
+              <strong>Истец:</strong> {{fullName}}<br/>
+              Адрес: {{plaintiffAddress}}<br/>
+              Телефон: {{plaintiffPhone}}<br/><br/>
+              <strong>Ответчик:</strong> {{defendant}}<br/>
+              Адрес: {{defendantAddress}}
+            </div>
+
             <h2 style="text-align: center; margin: 30px 0;">ИСКОВОЕ ЗАЯВЛЕНИЕ</h2>
-            <h3 style="text-align: center;">о защите прав потребителей</h3>
-            <p style="text-indent: 40px;">{{purchaseDate}} приобрел(а) у ответчика {{productService}} стоимостью {{price}} рублей. {{violation}}</p>
-            <h3 style="text-align: center;">ПРОШУ:</h3>
-            <ol><li>Взыскать с ответчика {{price}} рублей</li><li>Взыскать компенсацию морального вреда {{moralDamage}} рублей</li><li>Взыскать штраф 50% от суммы иска</li></ol>
-            <p>Дата: {{date}}<br/>Подпись: _____________</p>
+            <h3 style="text-align: center; margin-bottom: 20px;">о защите прав потребителей</h3>
+
+            <h3 style="margin-top: 20px;">Обстоятельства дела:</h3>
+            <p style="text-indent: 40px;">
+              {{purchaseDate}} я приобрел(а) у ответчика {{productService}} стоимостью {{price}} рублей.
+              Договор/чек/квитанция № {{documentNumber}} от {{purchaseDate}}.
+            </p>
+
+            <p style="text-indent: 40px;">
+              {{violation}}
+            </p>
+
+            <p style="text-indent: 40px;">
+              {{pretensionDate}} мною была направлена претензия ответчику с требованием {{pretensionDemand}}.
+              {{pretensionResult}}
+            </p>
+
+            <h3 style="margin-top: 30px;">Правовое обоснование:</h3>
+            <p style="text-indent: 40px;">
+              В соответствии со статьями 18, 23, 28 Закона РФ "О защите прав потребителей" потребитель
+              вправе требовать возмещения убытков, причиненных ему вследствие продажи товара ненадлежащего
+              качества либо предоставления услуги ненадлежащего качества.
+            </p>
+
+            <p style="text-indent: 40px;">
+              Согласно пункту 6 статьи 13 Закона РФ "О защите прав потребителей", при удовлетворении
+              судом требований потребителя, установленных законом, суд взыскивает с изготовителя (исполнителя,
+              продавца, уполномоченной организации или уполномоченного индивидуального предпринимателя,
+              импортера) за несоблюдение в добровольном порядке удовлетворения требований потребителя
+              штраф в размере пятьдесят процентов от суммы, присужденной судом в пользу потребителя.
+            </p>
+
+            <p style="text-indent: 40px;">
+              В силу статьи 15 Закона РФ "О защите прав потребителей" моральный вред, причиненный
+              потребителю вследствие нарушения изготовителем (исполнителем, продавцом) прав потребителя,
+              подлежит компенсации причинителем вреда при наличии его вины.
+            </p>
+
+            <h3 style="text-align: center; margin-top: 30px;">ПРОШУ СУД:</h3>
+            <ol>
+              <li>Взыскать с ответчика в мою пользу стоимость товара/услуги в размере {{price}} рублей</li>
+              <li>Взыскать компенсацию морального вреда в размере {{moralDamage}} рублей</li>
+              <li>Взыскать штраф в размере 50% от суммы, присужденной судом в мою пользу
+              (п. 6 ст. 13 Закона РФ "О защите прав потребителей")</li>
+              <li>Взыскать судебные расходы</li>
+            </ol>
+
+            <h3 style="margin-top: 30px;">Цена иска:</h3>
+            <p>{{price}} (стоимость товара/услуги) + {{moralDamage}} (моральный вред) = {{totalClaim}} рублей.</p>
+
+            <p style="text-indent: 40px;">
+              <i>Примечание: В соответствии с п. 3 ст. 17 Закона РФ "О защите прав потребителей" потребители
+              освобождаются от уплаты государственной пошлины по искам, связанным с нарушением их прав.</i>
+            </p>
+
+            <h3 style="margin-top: 30px;">Приложения:</h3>
+            <ol>
+              <li>Копия искового заявления для ответчика</li>
+              <li>Копия договора/чека/квитанции об оплате</li>
+              <li>Копия претензии с отметкой о вручении (или с описью вложения)</li>
+              <li>Документы, подтверждающие обстоятельства дела (акты, заключения экспертизы, фотографии и т.д.)</li>
+              <li>Расчет цены иска</li>
+            </ol>
+
+            <div style="margin-top: 40px;">
+              <p>
+                <span style="display: inline-block; width: 150px;">Дата:</span> {{date}}<br/>
+                <span style="display: inline-block; width: 150px;">Подпись истца:</span> _____________
+              </p>
+            </div>
           </div>`,
       }),
       isActive: true,
@@ -2218,7 +2448,7 @@ async function main() {
         templateId: consumerRightsTemplate.id,
         fieldName: 'courtName',
         fieldType: 'text',
-        label: 'Название суда',
+        label: 'Название суда (например, Тверской районный суд г. Москвы)',
         stepNumber: 1,
         order: 1,
         isRequired: true,
@@ -2227,25 +2457,52 @@ async function main() {
         templateId: consumerRightsTemplate.id,
         fieldName: 'fullName',
         fieldType: 'text',
-        label: 'Ваше ФИО',
+        label: 'Ваше ФИО (полностью)',
         stepNumber: 1,
         order: 2,
         isRequired: true,
       },
       {
         templateId: consumerRightsTemplate.id,
-        fieldName: 'defendant',
+        fieldName: 'plaintiffAddress',
         fieldType: 'text',
-        label: 'Ответчик (магазин/компания)',
+        label: 'Ваш адрес',
         stepNumber: 1,
         order: 3,
         isRequired: true,
       },
       {
         templateId: consumerRightsTemplate.id,
+        fieldName: 'plaintiffPhone',
+        fieldType: 'text',
+        label: 'Ваш телефон',
+        stepNumber: 1,
+        order: 4,
+        isRequired: true,
+      },
+      {
+        templateId: consumerRightsTemplate.id,
+        fieldName: 'defendant',
+        fieldType: 'text',
+        label: 'Ответчик (полное наименование организации)',
+        stepNumber: 1,
+        order: 5,
+        isRequired: true,
+      },
+      {
+        templateId: consumerRightsTemplate.id,
+        fieldName: 'defendantAddress',
+        fieldType: 'text',
+        label: 'Адрес ответчика',
+        stepNumber: 1,
+        order: 6,
+        isRequired: true,
+      },
+      {
+        templateId: consumerRightsTemplate.id,
         fieldName: 'purchaseDate',
         fieldType: 'date',
-        label: 'Дата покупки/заказа услуги',
+        label: 'Дата покупки товара/заказа услуги',
         stepNumber: 2,
         order: 1,
         isRequired: true,
@@ -2254,7 +2511,7 @@ async function main() {
         templateId: consumerRightsTemplate.id,
         fieldName: 'productService',
         fieldType: 'text',
-        label: 'Товар/услугу',
+        label: 'Наименование товара/услуги',
         stepNumber: 2,
         order: 2,
         isRequired: true,
@@ -2263,26 +2520,71 @@ async function main() {
         templateId: consumerRightsTemplate.id,
         fieldName: 'price',
         fieldType: 'number',
-        label: 'Стоимость (руб.)',
+        label: 'Стоимость товара/услуги (руб.)',
         stepNumber: 2,
         order: 3,
         isRequired: true,
       },
       {
         templateId: consumerRightsTemplate.id,
-        fieldName: 'violation',
-        fieldType: 'textarea',
-        label: 'Описание нарушения',
+        fieldName: 'documentNumber',
+        fieldType: 'text',
+        label: 'Номер договора/чека/квитанции',
         stepNumber: 2,
         order: 4,
         isRequired: true,
       },
       {
         templateId: consumerRightsTemplate.id,
+        fieldName: 'violation',
+        fieldType: 'textarea',
+        label: 'Подробное описание нарушения прав (какой недостаток обнаружен, в чем именно выражается нарушение)',
+        stepNumber: 2,
+        order: 5,
+        isRequired: true,
+      },
+      {
+        templateId: consumerRightsTemplate.id,
+        fieldName: 'pretensionDate',
+        fieldType: 'date',
+        label: 'Дата направления претензии ответчику',
+        stepNumber: 3,
+        order: 1,
+        isRequired: true,
+      },
+      {
+        templateId: consumerRightsTemplate.id,
+        fieldName: 'pretensionDemand',
+        fieldType: 'text',
+        label: 'Требование в претензии (например: возврата денежных средств, замены товара)',
+        stepNumber: 3,
+        order: 2,
+        isRequired: true,
+      },
+      {
+        templateId: consumerRightsTemplate.id,
+        fieldName: 'pretensionResult',
+        fieldType: 'textarea',
+        label: 'Результат рассмотрения претензии (например: Претензия оставлена без ответа / Получен отказ)',
+        stepNumber: 3,
+        order: 3,
+        isRequired: true,
+      },
+      {
+        templateId: consumerRightsTemplate.id,
         fieldName: 'moralDamage',
         fieldType: 'number',
-        label: 'Моральный вред (руб.)',
-        stepNumber: 2,
+        label: 'Размер компенсации морального вреда (руб.)',
+        stepNumber: 3,
+        order: 4,
+        isRequired: true,
+      },
+      {
+        templateId: consumerRightsTemplate.id,
+        fieldName: 'totalClaim',
+        fieldType: 'number',
+        label: 'Общая цена иска (автоматически: стоимость + моральный вред)',
+        stepNumber: 3,
         order: 5,
         isRequired: true,
       },
@@ -2290,8 +2592,8 @@ async function main() {
         templateId: consumerRightsTemplate.id,
         fieldName: 'date',
         fieldType: 'date',
-        label: 'Дата подачи',
-        stepNumber: 2,
+        label: 'Дата подачи искового заявления',
+        stepNumber: 3,
         order: 6,
         isRequired: true,
       },

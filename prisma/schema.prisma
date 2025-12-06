@@ -11,13 +11,17 @@ datasource db {
 }
 
 model User {
-  id           String     @id @default(uuid())
-  email        String     @unique
-  name         String?
-  passwordHash String?    @map("password_hash")
-  documents    Document[]
-  createdAt    DateTime   @default(now()) @map("created_at")
-  updatedAt    DateTime   @updatedAt @map("updated_at")
+  id              String              @id @default(uuid())
+  email           String?             @unique
+  phone           String?             @unique
+  name            String?
+  passwordHash    String?             @map("password_hash")
+  emailVerified   DateTime?           @map("email_verified")
+  phoneVerified   DateTime?           @map("phone_verified")
+  documents       Document[]
+  verificationCodes VerificationCode[]
+  createdAt       DateTime            @default(now()) @map("created_at")
+  updatedAt       DateTime            @updatedAt @map("updated_at")
 
   @@map("users")
 }
@@ -94,4 +98,21 @@ model Document {
   @@index([templateId])
   @@index([status])
   @@map("documents")
+}
+
+model VerificationCode {
+  id         String   @id @default(uuid())
+  userId     String?  @map("user_id")
+  user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  identifier String   // Email или телефон
+  code       String   // 6-значный код
+  type       String   // "email" | "phone"
+  expiresAt  DateTime @map("expires_at")
+  verified   Boolean  @default(false)
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@index([identifier])
+  @@index([code])
+  @@index([expiresAt])
+  @@map("verification_codes")
 }

@@ -35,6 +35,6 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    sitemap: 'https://goszayavleniya.ru/sitemap.xml',
+    sitemap: 'https://oneclickdoc.ru/sitemap.xml',
   }
 }

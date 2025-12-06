@@ -33,7 +33,7 @@ export default function LoginPage() {
 
     try {
       const result = await signIn('credentials', {
-        email: formData.email,
+        identifier: formData.email,
         password: formData.password,
         redirect: false,
       })
@@ -121,15 +121,6 @@ export default function LoginPage() {
               >
                 Зарегистрироваться
               </Link>
-            </div>
-
-            {/* Test credentials hint */}
-            <div className="mt-4 rounded-lg bg-blue-50 p-3 text-xs text-blue-600">
-              <strong>Тестовый аккаунт:</strong>
-              <br />
-              Email: test@example.com
-              <br />
-              Пароль: password123
             </div>
           </Card>
         </div>

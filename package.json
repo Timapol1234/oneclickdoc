@@ -1,5 +1,5 @@
 {
-  "name": "goszayavleniya",
+  "name": "oneclickdoc",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -28,6 +28,7 @@
     "html2pdf.js": "^0.12.1",
     "next": "^14.2.33",
     "next-auth": "^4.24.7",
+    "nodemailer": "^7.0.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.51.5",
@@ -38,6 +39,7 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20.12.12",
+    "@types/nodemailer": "^7.0.4",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.19",

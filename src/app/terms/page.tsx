@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import MainLayout from '@/components/layout/MainLayout'
 
 export const metadata: Metadata = {
-  title: 'Пользовательское соглашение | Конструктор заявлений',
+  title: 'Пользовательское соглашение | oneclickdoc',
   description:
     'Условия использования сервиса для создания заявлений и документов',
 }
@@ -27,7 +27,7 @@ export default function TermsPage() {
             <p>
               Настоящее Пользовательское соглашение (далее — «Соглашение»)
               регулирует отношения между владельцем сайта{' '}
-              <strong>gosZayavleniya</strong> (далее — «Сервис») и
+              <strong>oneclickdoc</strong> (далее — «Сервис») и
               пользователем сайта (далее — «Пользователь»).
             </p>
             <p>
@@ -185,10 +185,10 @@ export default function TermsPage() {
             <p className="mt-2">
               Email:{' '}
               <a
-                href="mailto:support@goszayavleniya.ru"
+                href="mailto:support@oneclickdoc.ru"
                 className="text-primary hover:underline"
               >
-                support@goszayavleniya.ru
+                support@oneclickdoc.ru
               </a>
             </p>
           </section>

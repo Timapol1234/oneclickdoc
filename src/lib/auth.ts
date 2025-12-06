@@ -8,16 +8,22 @@ export const authOptions: AuthOptions = {
     CredentialsProvider({
       name: 'credentials',
       credentials: {
-        email: { label: 'Email', type: 'email' },
+        identifier: { label: 'Email or Phone', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
+        if (!credentials?.identifier || !credentials?.password) {
           throw new Error('Неверные данные')
         }
 
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
+        // Определяем, является ли идентификатор email или телефоном
+        const isEmail = credentials.identifier.includes('@')
+
+        // Ищем пользователя по email или телефону
+        const user = await prisma.user.findFirst({
+          where: isEmail
+            ? { email: credentials.identifier }
+            : { phone: credentials.identifier },
         })
 
         if (!user || !user.passwordHash) {
@@ -35,7 +41,8 @@ export const authOptions: AuthOptions = {
 
         return {
           id: user.id,
-          email: user.email,
+          email: user.email || undefined,
+          phone: user.phone || undefined,
           name: user.name,
         }
       },
@@ -51,12 +58,14 @@ export const authOptions: AuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id
+        token.phone = (user as any).phone
       }
       return token
     },
     async session({ session, token }) {
       if (session.user) {
         ;(session.user as any).id = token.id
+        ;(session.user as any).phone = token.phone
       }
       return session
     },
