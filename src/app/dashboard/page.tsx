@@ -119,25 +119,25 @@ export default function DashboardPage() {
 
   return (
     <MainLayout>
-      <div className="mx-auto max-w-7xl px-4 py-8">
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:py-8">
         {/* Заголовок */}
-        <div className="mb-8 flex items-center justify-between">
+        <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">
-              Мои документы
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+              Документы
             </h1>
-            <p className="mt-1 text-gray-600">
+            <p className="mt-1 text-sm sm:text-base text-gray-600">
               Всего документов: {documents.length}
             </p>
           </div>
-          <Button onClick={handleCreateNew}>
+          <Button onClick={handleCreateNew} className="w-full sm:w-auto">
             <span className="material-symbols-outlined mr-2">add</span>
             Создать документ
           </Button>
         </div>
 
         {/* Фильтры и поиск */}
-        <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="mb-6 grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3">
           {/* Поиск */}
           <Input
             type="text"
@@ -171,29 +171,29 @@ export default function DashboardPage() {
 
         {/* Список документов */}
         {filteredDocuments.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 py-16">
-            <span className="material-symbols-outlined text-6xl text-gray-300">
+          <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 py-12 sm:py-16 px-4">
+            <span className="material-symbols-outlined text-5xl sm:text-6xl text-gray-300">
               description
             </span>
-            <h3 className="mt-4 text-lg font-medium text-gray-900">
+            <h3 className="mt-4 text-base sm:text-lg font-medium text-gray-900 text-center">
               {searchQuery || statusFilter !== 'all'
                 ? 'Документы не найдены'
                 : 'У вас пока нет документов'}
             </h3>
-            <p className="mt-2 text-gray-500">
+            <p className="mt-2 text-sm sm:text-base text-gray-500 text-center max-w-md">
               {searchQuery || statusFilter !== 'all'
                 ? 'Попробуйте изменить параметры поиска'
                 : 'Начните создание документа из готового шаблона'}
             </p>
             {!searchQuery && statusFilter === 'all' && (
-              <Button className="mt-6" onClick={handleCreateNew}>
+              <Button className="mt-6 w-full sm:w-auto" onClick={handleCreateNew}>
                 <span className="material-symbols-outlined mr-2">add</span>
                 Создать первый документ
               </Button>
             )}
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3">
             {filteredDocuments.map((document) => (
               <DocumentCard
                 key={document.id}

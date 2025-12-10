@@ -1,15 +1,15 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Личный кабинет | Мои заявления и документы',
+  title: 'Личный кабинет | oneclickdoc',
   description:
     'Управляйте своими заявлениями и документами в личном кабинете. Просматривайте, редактируйте и скачивайте созданные документы.',
   openGraph: {
-    title: 'Личный кабинет | Мои документы',
+    title: 'Личный кабинет | oneclickdoc',
     description: 'Управление заявлениями и документами',
     type: 'website',
     locale: 'ru_RU',
-    url: 'https://goszayavleniya.ru/dashboard',
+    url: 'https://oneclickdoc.ru/dashboard',
   },
   robots: {
     index: false,

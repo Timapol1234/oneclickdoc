@@ -15,6 +15,7 @@ export default function Header({ transparent = false }: HeaderProps) {
   const pathname = usePathname()
   const { data: session, status } = useSession()
   const [scrolled, setScrolled] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   // Отслеживание скролла
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function Header({ transparent = false }: HeaderProps) {
 
   const navigation = [
     { name: 'Шаблоны', href: '/templates' },
-    ...(session ? [{ name: 'Мои документы', href: '/dashboard' }] : []),
+    ...(session ? [{ name: 'Документы', href: '/dashboard' }] : []),
   ]
 
   const handleSignOut = async () => {
@@ -120,12 +121,77 @@ export default function Header({ transparent = false }: HeaderProps) {
         </div>
 
         {/* Mobile menu button */}
-        <button className="md:hidden">
+        <button
+          className="md:hidden p-2"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
           <span className="material-symbols-outlined text-text-primary">
-            menu
+            {mobileMenuOpen ? 'close' : 'menu'}
           </span>
         </button>
       </div>
+
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden absolute left-0 right-0 top-full border-b border-border-light bg-white shadow-lg">
+          <nav className="flex flex-col p-4">
+            {navigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={cn(
+                  'px-4 py-3 text-base font-medium transition-colors rounded-lg',
+                  pathname === item.href
+                    ? 'bg-primary/10 text-primary'
+                    : 'text-text-secondary hover:bg-gray-50 hover:text-text-primary'
+                )}
+              >
+                {item.name}
+              </Link>
+            ))}
+
+            {/* Mobile actions */}
+            <div className="mt-4 flex flex-col gap-2 border-t border-border-light pt-4">
+              {status === 'loading' ? (
+                <div className="h-10 animate-pulse rounded-full bg-gray-200"></div>
+              ) : session ? (
+                <>
+                  <div className="flex items-center gap-2 px-4 py-2 text-sm text-text-secondary">
+                    <span className="material-symbols-outlined text-primary">
+                      account_circle
+                    </span>
+                    <span className="truncate">{session.user?.name || session.user?.email}</span>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      handleSignOut()
+                    }}
+                    className="w-full rounded-full border border-primary bg-transparent px-4 py-3 text-sm font-bold text-primary transition-colors hover:bg-primary/10"
+                  >
+                    Выйти
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
+                    <button className="w-full rounded-full bg-primary-accent px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-primary">
+                      Регистрация
+                    </button>
+                  </Link>
+                  <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                    <button className="w-full rounded-full border border-primary bg-transparent px-4 py-3 text-sm font-bold text-primary transition-colors hover:bg-primary/10">
+                      Войти
+                    </button>
+                  </Link>
+                </>
+              )}
+            </div>
+          </nav>
+        </div>
+      )}
     </header>
   )
 }

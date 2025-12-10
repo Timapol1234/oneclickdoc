@@ -5,28 +5,28 @@ import Footer from '@/components/layout/Footer'
 import LiveSearch from '@/components/ui/LiveSearch'
 
 export const metadata: Metadata = {
-  title: 'Мои документы | Создайте заявление за 5 минут бесплатно',
+  title: 'Создайте заявление за 5 минут',
   description:
     'Простой конструктор для создания юридически верных заявлений в МФЦ, суды, банки, ФНС. Более 50 готовых шаблонов документов. Бесплатно и без регистрации.',
   keywords:
     'заявление онлайн, конструктор заявлений, шаблоны заявлений, МФЦ заявление, исковое заявление, налоговый вычет, претензия в банк, документы онлайн',
   openGraph: {
-    title: 'Мои документы | Создайте документ за 5 минут',
+    title: 'Создайте документ за 5 минут',
     description:
       'Создавайте юридически корректные заявления для МФЦ, судов, банков и других организаций. Просто, быстро, бесплатно.',
     type: 'website',
     locale: 'ru_RU',
-    url: 'https://goszayavleniya.ru',
-    siteName: 'Мои документы',
+    url: 'https://oneclickdoc.ru',
+    siteName: 'oneclickdoc',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Мои документы | Создайте документ за 5 минут',
+    title: 'Создайте документ за 5 минут',
     description:
       'Создавайте юридически корректные заявления для МФЦ, судов, банков. Бесплатно.',
   },
   alternates: {
-    canonical: 'https://goszayavleniya.ru',
+    canonical: 'https://oneclickdoc.ru',
   },
 }
 
@@ -51,16 +51,16 @@ export default function HomePage() {
       <div className="relative z-10 flex h-full grow flex-col">
         <Header transparent />
 
-        <main className="flex flex-grow items-center justify-center px-4 pt-20 sm:px-6 lg:px-8">
+        <main className="flex flex-grow items-center justify-center px-4 pt-20 pb-12 sm:px-6 lg:px-8">
           <div className="w-full max-w-2xl text-center">
             {/* Title with decorative element */}
-            <div className="mb-8">
-              <div className="mb-4 inline-flex animate-slideDown items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-sm font-medium text-primary backdrop-blur-sm">
-                <span className="material-symbols-outlined text-base">verified</span>
+            <div className="mb-6 sm:mb-8">
+              <div className="mb-3 sm:mb-4 inline-flex animate-slideDown items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-primary backdrop-blur-sm">
+                <span className="material-symbols-outlined text-sm sm:text-base">verified</span>
                 <span>Юридически верные документы</span>
               </div>
-              <h1 className="animate-slideUp font-display text-4xl font-bold leading-tight tracking-tight text-text-primary sm:text-5xl">
-                Ваши документы. Просто и быстро.
+              <h1 className="animate-slideUp font-display text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-text-primary px-2">
+                Все документы в одном месте. Просто и быстро.
               </h1>
             </div>
 
@@ -70,14 +70,14 @@ export default function HomePage() {
             </div>
 
             {/* Popular categories with icons */}
-            <div className="animate-fadeIn animate-delay-300 mt-8 flex flex-wrap items-center justify-center gap-3">
-              <span className="mr-2 text-sm font-medium text-text-secondary">
+            <div className="animate-fadeIn animate-delay-300 mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+              <span className="w-full sm:w-auto sm:mr-2 text-xs sm:text-sm font-medium text-text-secondary mb-1 sm:mb-0">
                 Популярное:
               </span>
               {popularCategories.map((category, index) => (
                 <Link key={category.label} href={category.href}>
                   <button
-                    className="group rounded-full border-2 border-border-light bg-content-light px-4 py-2 text-sm font-medium leading-normal shadow-sm transition-all duration-300 hover:border-primary hover:bg-primary hover:text-white hover:shadow-md hover:scale-105"
+                    className="group rounded-full border-2 border-border-light bg-content-light px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium leading-normal shadow-sm transition-all duration-300 hover:border-primary hover:bg-primary hover:text-white hover:shadow-md hover:scale-105"
                     style={{ animationDelay: `${300 + index * 100}ms` }}
                   >
                     {category.label}
@@ -87,17 +87,17 @@ export default function HomePage() {
             </div>
 
             {/* Stats or features */}
-            <div className="animate-fadeIn animate-delay-400 mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-text-secondary">
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-primary">check_circle</span>
+            <div className="animate-fadeIn animate-delay-400 mt-8 sm:mt-12 flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-text-secondary">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="material-symbols-outlined text-base sm:text-xl text-primary">check_circle</span>
                 <span>Более 50 шаблонов</span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-primary">schedule</span>
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="material-symbols-outlined text-base sm:text-xl text-primary">schedule</span>
                 <span>5-10 минут</span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-primary">workspace_premium</span>
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="material-symbols-outlined text-base sm:text-xl text-primary">workspace_premium</span>
                 <span>100% бесплатно</span>
               </div>
             </div>
