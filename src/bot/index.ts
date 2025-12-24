@@ -1,5 +1,6 @@
 import { Bot, webhookCallback } from 'grammy';
 import type { Context } from 'grammy';
+import { registerHandlers } from './handlers';
 
 export interface BotContext extends Context {
   session?: {
@@ -21,10 +22,8 @@ export function getBot(): Bot<BotContext> {
 
     bot = new Bot<BotContext>(token);
 
-    // Импортируем и регистрируем обработчики
-    import('./handlers').then(({ registerHandlers }) => {
-      registerHandlers(bot!);
-    });
+    // Регистрируем обработчики синхронно
+    registerHandlers(bot);
   }
 
   return bot;
