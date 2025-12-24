@@ -2,7 +2,6 @@ import type { BotContext } from '../index';
 import { prisma } from '@/lib/prisma';
 import { InlineKeyboard } from 'grammy';
 import { format } from 'date-fns';
-import { ru } from 'date-fns/locale';
 
 export async function handleDocuments(ctx: BotContext) {
   const telegramId = ctx.from?.id.toString();
@@ -45,7 +44,7 @@ export async function handleDocuments(ctx: BotContext) {
     let message = '📄 Ваши документы:\n\n';
 
     documents.forEach((doc, index) => {
-      const date = format(new Date(doc.updatedAt), 'dd.MM.yyyy', { locale: ru });
+      const date = format(new Date(doc.updatedAt), 'dd.MM.yyyy');
       const status = doc.status === 'generated' ? '✅' : '⏳';
 
       message += `${index + 1}. ${status} ${doc.title}\n`;
