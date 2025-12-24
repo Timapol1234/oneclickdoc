@@ -1,7 +1,8 @@
 import type { BotContext } from '../index';
 import { prisma } from '@/lib/prisma';
-import { InlineKeyboard } from 'grammy';
+import { InlineKeyboard, InputFile } from 'grammy';
 import { sessionManager } from '../session/SessionManager';
+import { createDocumentFile } from '../utils/documentGenerator';
 
 export async function handleStartForm(ctx: BotContext) {
   const callbackData = ctx.callbackQuery?.data;
@@ -214,26 +215,57 @@ async function completeForm(ctx: BotContext, telegramId: string) {
 
   try {
     // Сохраняем заполненные данные в документ
-    await prisma.document.update({
+    const document = await prisma.document.update({
       where: { id: session.documentId },
       data: {
         filledData: JSON.stringify(session.formData),
         status: 'generated'
+      },
+      include: {
+        template: true
       }
     });
 
     sessionManager.deleteSession(telegramId);
 
-    const keyboard = new InlineKeyboard()
-      .text('📄 Мои документы', 'show_documents')
-      .row()
-      .text('🏠 Главное меню', 'back_to_main');
+    await ctx.reply('✅ Отлично! Форма заполнена.\n\n📄 Генерирую документ...');
 
-    await ctx.reply(
-      '✅ Отлично! Форма заполнена.\n\n' +
-      'Ваш документ сохранен. Генерация PDF будет доступна в ближайшее время.',
-      { reply_markup: keyboard }
-    );
+    // Генерируем и отправляем HTML файл
+    try {
+      const htmlBuffer = await createDocumentFile(document.id);
+      const fileName = `${document.title.replace(/[^a-zа-яё0-9]/gi, '_')}.html`;
+
+      await ctx.replyWithDocument(
+        new InputFile(htmlBuffer, fileName),
+        {
+          caption: `📄 ${document.title}\n\nВы можете открыть этот файл в браузере и сохранить как PDF через печать (Ctrl+P → Сохранить как PDF).`
+        }
+      );
+
+      const keyboard = new InlineKeyboard()
+        .text('📄 Мои документы', 'show_documents')
+        .row()
+        .text('🏠 Главное меню', 'back_to_main');
+
+      await ctx.reply(
+        '✨ Документ успешно создан и отправлен!',
+        { reply_markup: keyboard }
+      );
+
+    } catch (docError) {
+      console.error('Error generating document:', docError);
+
+      const keyboard = new InlineKeyboard()
+        .text('📄 Мои документы', 'show_documents')
+        .row()
+        .text('🏠 Главное меню', 'back_to_main');
+
+      await ctx.reply(
+        '⚠️ Документ сохранен, но возникла ошибка при генерации файла.\n' +
+        'Вы можете просмотреть его в разделе "Мои документы".',
+        { reply_markup: keyboard }
+      );
+    }
 
   } catch (error) {
     console.error('Error completing form:', error);

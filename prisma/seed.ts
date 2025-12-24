@@ -21,7 +21,7 @@ async function main() {
       data: {
         name: 'МФЦ и госуслуги',
         slug: 'mfc-gosuslugi',
-        icon: 'account_balance',
+        icon: '🏛️',
         description: 'Заявления в МФЦ, получение документов',
         order: 1,
       },
@@ -30,7 +30,7 @@ async function main() {
       data: {
         name: 'Суды',
         slug: 'courts',
-        icon: 'gavel',
+        icon: '⚖️',
         description: 'Исковые заявления, жалобы в суд',
         order: 2,
       },
@@ -39,7 +39,7 @@ async function main() {
       data: {
         name: 'Банки',
         slug: 'banks',
-        icon: 'account_balance_wallet',
+        icon: '🏦',
         description: 'Претензии в банк, возврат средств',
         order: 3,
       },
@@ -48,7 +48,7 @@ async function main() {
       data: {
         name: 'ФНС',
         slug: 'fns',
-        icon: 'receipt_long',
+        icon: '📋',
         description: 'Налоговые вычеты, регистрация ИП',
         order: 4,
       },
@@ -57,7 +57,7 @@ async function main() {
       data: {
         name: 'Работодатели',
         slug: 'employers',
-        icon: 'work',
+        icon: '💼',
         description: 'Заявления на отпуск, увольнение',
         order: 5,
       },
@@ -66,7 +66,7 @@ async function main() {
       data: {
         name: 'Другие организации',
         slug: 'other',
-        icon: 'business',
+        icon: '🏢',
         description: 'ЖКХ, образование, здравоохранение',
         order: 6,
       },
