@@ -3,7 +3,7 @@ import { getBot } from '@/bot';
 
 export async function POST(request: NextRequest) {
   try {
-    const bot = getBot();
+    const bot = await getBot();
     const webhookUrl = process.env.WEBHOOK_URL || process.env.VERCEL_URL;
 
     if (!webhookUrl) {
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   try {
-    const bot = getBot();
+    const bot = await getBot();
     const info = await bot.api.getWebhookInfo();
 
     return NextResponse.json({
@@ -53,7 +53,7 @@ export async function GET() {
 
 export async function DELETE() {
   try {
-    const bot = getBot();
+    const bot = await getBot();
     await bot.api.deleteWebhook();
 
     return NextResponse.json({

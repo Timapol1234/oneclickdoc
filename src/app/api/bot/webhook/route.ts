@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     console.log('[Webhook] Update:', JSON.stringify(body, null, 2));
 
-    const bot = getBot();
+    const bot = await getBot();
     console.log('[Webhook] Bot initialized, processing update...');
 
     await bot.handleUpdate(body);

@@ -12,28 +12,40 @@ export interface BotContext extends Context {
 }
 
 let bot: Bot<BotContext> | null = null;
+let botInitPromise: Promise<Bot<BotContext>> | null = null;
 
-export function getBot(): Bot<BotContext> {
+export async function getBot(): Promise<Bot<BotContext>> {
   if (!bot) {
-    console.log('[Bot] Initializing bot...');
-    const token = process.env.TELEGRAM_BOT_TOKEN;
-    if (!token) {
-      console.error('[Bot] TELEGRAM_BOT_TOKEN is not defined!');
-      throw new Error('TELEGRAM_BOT_TOKEN is not defined');
+    if (!botInitPromise) {
+      botInitPromise = (async () => {
+        console.log('[Bot] Initializing bot...');
+        const token = process.env.TELEGRAM_BOT_TOKEN;
+        if (!token) {
+          console.error('[Bot] TELEGRAM_BOT_TOKEN is not defined!');
+          throw new Error('TELEGRAM_BOT_TOKEN is not defined');
+        }
+
+        console.log('[Bot] Token found, creating bot instance...');
+        const newBot = new Bot<BotContext>(token);
+
+        console.log('[Bot] Calling bot.init()...');
+        await newBot.init();
+
+        console.log('[Bot] Registering handlers...');
+        registerHandlers(newBot);
+        console.log('[Bot] Bot initialized successfully');
+
+        bot = newBot;
+        return newBot;
+      })();
     }
-
-    console.log('[Bot] Token found, creating bot instance...');
-    bot = new Bot<BotContext>(token);
-
-    console.log('[Bot] Registering handlers...');
-    // Регистрируем обработчики синхронно
-    registerHandlers(bot);
-    console.log('[Bot] Bot initialized successfully');
+    return botInitPromise;
   }
 
   return bot;
 }
 
-export function getBotWebhook() {
-  return webhookCallback(getBot(), 'std/http');
+export async function getBotWebhook() {
+  const bot = await getBot();
+  return webhookCallback(bot, 'std/http');
 }
