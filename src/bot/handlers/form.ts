@@ -2,7 +2,7 @@ import type { BotContext } from '../index';
 import { prisma } from '@/lib/prisma';
 import { InlineKeyboard, InputFile } from 'grammy';
 import { sessionManager } from '../session/SessionManager';
-import { createDocumentFile } from '../utils/documentGenerator';
+import { createDocumentPDF } from '../utils/documentGenerator';
 
 export async function handleStartForm(ctx: BotContext) {
   const callbackData = ctx.callbackQuery?.data;
@@ -230,15 +230,15 @@ async function completeForm(ctx: BotContext, telegramId: string) {
 
     await ctx.reply('✅ Отлично! Форма заполнена.\n\n📄 Генерирую документ...');
 
-    // Генерируем и отправляем HTML файл
+    // Генерируем и отправляем PDF файл
     try {
-      const htmlBuffer = await createDocumentFile(document.id);
-      const fileName = `${document.title.replace(/[^a-zа-яё0-9]/gi, '_')}.html`;
+      const pdfBuffer = await createDocumentPDF(document.id);
+      const fileName = `${document.title.replace(/[^a-zа-яё0-9]/gi, '_')}.pdf`;
 
       await ctx.replyWithDocument(
-        new InputFile(htmlBuffer, fileName),
+        new InputFile(pdfBuffer, fileName),
         {
-          caption: `📄 ${document.title}\n\nВы можете открыть этот файл в браузере и сохранить как PDF через печать (Ctrl+P → Сохранить как PDF).`
+          caption: `📄 ${document.title}\n\nГотовый PDF документ для использования.`
         }
       );
 

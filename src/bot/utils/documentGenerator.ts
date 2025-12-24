@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
-import { InputFile } from 'grammy';
+import chromium from 'chrome-aws-lambda';
+import puppeteer from 'puppeteer-core';
 
 export async function generateDocumentHTML(documentId: string): Promise<string> {
   // Получаем документ с шаблоном
@@ -62,9 +63,49 @@ export async function generateDocumentHTML(documentId: string): Promise<string> 
   return fullHTML;
 }
 
-export async function createDocumentFile(documentId: string): Promise<Buffer> {
+export async function createDocumentPDF(documentId: string): Promise<Buffer> {
   const html = await generateDocumentHTML(documentId);
 
-  // Преобразуем HTML в Buffer для отправки как файл
-  return Buffer.from(html, 'utf-8');
+  let browser = null;
+
+  try {
+    // Определяем окружение
+    const isDev = process.env.NODE_ENV !== 'production';
+
+    browser = await puppeteer.launch({
+      args: isDev
+        ? []
+        : chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: isDev
+        ? process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium-browser' || '/usr/bin/google-chrome'
+        : await chromium.executablePath,
+      headless: true,
+    });
+
+    const page = await browser.newPage();
+    await page.setContent(html, { waitUntil: 'networkidle0' });
+
+    // Генерируем PDF
+    const pdf = await page.pdf({
+      format: 'A4',
+      printBackground: true,
+      margin: {
+        top: '2cm',
+        right: '2cm',
+        bottom: '2cm',
+        left: '2cm'
+      }
+    });
+
+    return Buffer.from(pdf);
+
+  } catch (error) {
+    console.error('Error generating PDF:', error);
+    throw error;
+  } finally {
+    if (browser) {
+      await browser.close();
+    }
+  }
 }
