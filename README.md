@@ -6,10 +6,12 @@
 
 - **Frontend:** Next.js 14, React 18, TypeScript, TailwindCSS
 - **Backend:** Next.js API Routes, Prisma ORM
-- **База данных:** SQLite
+- **База данных:** PostgreSQL (Neon.tech)
 - **Аутентификация:** NextAuth.js
-- **Валидация:** Zod
+- **Валидация:** Zod, React Hook Form
 - **Управление состоянием:** Zustand
+- **Telegram Bot:** Grammy
+- **Email:** Nodemailer
 
 ## Быстрый старт
 
@@ -63,11 +65,48 @@ gosZayavleniya/
 - `npm run start` - Запуск production сборки
 - `npm run lint` - Проверка кода ESLint
 - `npm run format` - Форматирование кода Prettier
+- `npm run type-check` - Проверка типов TypeScript
+
+### База данных
+
+- `npx prisma migrate dev` - Создать и применить миграцию
+- `npx prisma db push` - Применить изменения схемы (разработка)
+- `npx prisma studio` - Открыть Prisma Studio
+- `npx prisma db seed` - Заполнить БД начальными данными
+
+## Telegram Bot
+
+Проект включает полнофункционального Telegram бота для создания заявлений через мессенджер.
+
+### Возможности бота:
+
+- Регистрация и авторизация через Telegram
+- Просмотр доступных шаблонов заявлений
+- Интерактивное заполнение форм в чате
+- Сохранение и просмотр документов
+- Пошаговая система с валидацией
+
+### Быстрый старт:
+
+```bash
+# 1. Добавьте в .env токен бота
+TELEGRAM_BOT_TOKEN="your-bot-token"
+WEBHOOK_URL="https://your-app.vercel.app"
+
+# 2. Настройте вебхук (после деплоя)
+curl -X POST https://your-app.vercel.app/api/bot/setup
+```
+
+### Документация:
+
+- [Полная документация бота](docs/TELEGRAM_BOT.md)
+- [Быстрый старт](docs/TELEGRAM_BOT_QUICKSTART.md)
 
 ## Документация
 
-- [Архитектура проекта](../architecture.md)
-- [План разработки](../development-plan.md)
+- [CLAUDE.md](CLAUDE.md) - Руководство для разработки
+- [Telegram Bot](docs/TELEGRAM_BOT.md) - Документация бота
+- [Быстрый старт бота](docs/TELEGRAM_BOT_QUICKSTART.md)
 
 ## Лицензия
 
